@@ -1,0 +1,136 @@
+<div class="transaction-list">
+  <div class="transaction-header">
+    <h2>Transaction Management</h2>
+    <p class="transaction-subtitle">Monitor and manage all banking transactions</p>
+  </div>
+
+  <div class="filters-section">
+    <div class="filter-group">
+      <label for="search">Search Transactions:</label>
+      <input 
+        id="search"
+        type="text" 
+        [(ngModel)]="searchTerm" 
+        (input)="onSearchChange()"
+        placeholder="Search by ID, description, or account..."
+        class="search-input">
+    </div>
+
+    <div class="filter-group">
+      <label for="status-filter">Status:</label>
+      <select 
+        id="status-filter"
+        [(ngModel)]="filterStatus" 
+        (change)="onFilterChange()"
+        class="filter-select">
+        <option value="all">All Statuses</option>
+        <option value="pending">Pending</option>
+        <option value="approved">Approved</option>
+        <option value="completed">Completed</option>
+        <option value="rejected">Rejected</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="type-filter">Type:</label>
+      <select 
+        id="type-filter"
+        [(ngModel)]="filterType" 
+        (change)="onFilterChange()"
+        class="filter-select">
+        <option value="all">All Types</option>
+        <option value="wire">Wire Transfer</option>
+        <option value="ach">ACH Payment</option>
+        <option value="internal">Internal Transfer</option>
+        <option value="international">International</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="loading-spinner" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Loading transactions...</p>
+  </div>
+
+  <div class="transactions-container" *ngIf="!isLoading">
+    <div class="transactions-summary">
+      <p><strong>{{ filteredTransactions.length }}</strong> transactions found</p>
+    </div>
+
+    <div class="transactions-table" *ngIf="filteredTransactions.length > 0; else noTransactions">
+      <div class="table-header">
+        <div class="col-id">Transaction ID</div>
+        <div class="col-timestamp">Date & Time</div>
+        <div class="col-amount">Amount</div>
+        <div class="col-accounts">From → To</div>
+        <div class="col-type">Type</div>
+        <div class="col-status">Status</div>
+        <div class="col-risk">Risk</div>
+        <div class="col-description">Description</div>
+        <div class="col-actions">Actions</div>
+      </div>
+
+      <div class="table-row" *ngFor="let transaction of filteredTransactions">
+        <div class="col-id">{{ transaction.id }}</div>
+        <div class="col-timestamp">{{ formatDate(transaction.timestamp) }}</div>
+        <div class="col-amount">{{ formatCurrency(transaction.amount, transaction.currency) }}</div>
+        <div class="col-accounts">
+          <div class="account-flow">
+            <span class="account">{{ transaction.fromAccount }}</span>
+            <span class="arrow">→</span>
+            <span class="account">{{ transaction.toAccount }}</span>
+          </div>
+        </div>
+        <div class="col-type">
+          <span class="transaction-type" [class]="'type-' + transaction.type">
+            {{ transaction.type | uppercase }}
+          </span>
+        </div>
+        <div class="col-status">
+          <span class="status" [class]="'status-' + transaction.status">
+            {{ transaction.status | uppercase }}
+          </span>
+        </div>
+        <div class="col-risk">
+          <span class="risk-score" [class]="getRiskLevelClass(transaction.riskScore)">
+            {{ transaction.riskScore }}
+          </span>
+        </div>
+        <div class="col-description">
+          <div class="description-content">
+            <p class="description-text">{{ transaction.description }}</p>
+            <p class="approver-info" *ngIf="transaction.approver">
+              <strong>Approver:</strong> {{ transaction.approver }}
+            </p>
+            <p class="notes" *ngIf="transaction.notes">
+              <strong>Notes:</strong> {{ transaction.notes }}
+            </p>
+          </div>
+        </div>
+        <div class="col-actions">
+          <div class="action-buttons" *ngIf="transaction.status === 'pending'">
+            <button class="btn btn-approve" (click)="approveTransaction(transaction.id)">
+              Approve
+            </button>
+            <button class="btn btn-reject" (click)="rejectTransaction(transaction.id)">
+              Reject
+            </button>
+          </div>
+          <div class="action-status" *ngIf="transaction.status !== 'pending'">
+            <span class="status-indicator" [class]="'indicator-' + transaction.status">
+              {{ transaction.status === 'approved' ? '✓' : transaction.status === 'completed' ? '✓' : '✗' }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noTransactions>
+      <div class="empty-state">
+        <div class="empty-icon">📋</div>
+        <h3>No transactions found</h3>
+        <p>Try adjusting your search criteria or filters</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

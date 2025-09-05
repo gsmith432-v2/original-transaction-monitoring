@@ -1,0 +1,94 @@
+<div class="total-volume-page">
+  <div class="page-header">
+    <h2>Transactions by Volume</h2>
+    <p class="page-subtitle">Transactions sorted by amount (highest first)</p>
+    <button class="btn btn-back" routerLink="/dashboard">← Back to Dashboard</button>
+  </div>
+
+  <div class="loading-spinner" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Loading transactions by volume...</p>
+  </div>
+
+  <div class="transactions-container" *ngIf="!isLoading">
+    <div class="transactions-summary">
+      <p><strong>{{ transactions.length }}</strong> transactions sorted by volume</p>
+    </div>
+
+    <div class="transactions-table" *ngIf="transactions.length > 0; else noTransactions">
+      <div class="table-header">
+        <div class="col-id">Transaction ID</div>
+        <div class="col-timestamp">Date & Time</div>
+        <div class="col-amount">Amount</div>
+        <div class="col-accounts">From → To</div>
+        <div class="col-type">Type</div>
+        <div class="col-status">Status</div>
+        <div class="col-risk">Risk</div>
+        <div class="col-description">Description</div>
+        <div class="col-actions">Actions</div>
+      </div>
+
+      <div class="table-row" *ngFor="let transaction of transactions">
+        <div class="col-id">{{ transaction.id }}</div>
+        <div class="col-timestamp">{{ formatDate(transaction.timestamp) }}</div>
+        <div class="col-amount">{{ formatCurrency(transaction.amount, transaction.currency) }}</div>
+        <div class="col-accounts">
+          <div class="account-flow">
+            <span class="account">{{ transaction.fromAccount }}</span>
+            <span class="arrow">→</span>
+            <span class="account">{{ transaction.toAccount }}</span>
+          </div>
+        </div>
+        <div class="col-type">
+          <span class="transaction-type" [class]="'type-' + transaction.type">
+            {{ transaction.type | uppercase }}
+          </span>
+        </div>
+        <div class="col-status">
+          <span class="status" [class]="'status-' + transaction.status">
+            {{ transaction.status | uppercase }}
+          </span>
+        </div>
+        <div class="col-risk">
+          <span class="risk-score" [class]="getRiskLevelClass(transaction.riskScore)">
+            {{ transaction.riskScore }}
+          </span>
+        </div>
+        <div class="col-description">
+          <div class="description-content">
+            <p class="description-text">{{ transaction.description }}</p>
+            <p class="approver-info" *ngIf="transaction.approver">
+              <strong>Approver:</strong> {{ transaction.approver }}
+            </p>
+            <p class="notes" *ngIf="transaction.notes">
+              <strong>Notes:</strong> {{ transaction.notes }}
+            </p>
+          </div>
+        </div>
+        <div class="col-actions">
+          <div class="action-buttons" *ngIf="transaction.status === 'pending'">
+            <button class="btn btn-approve" (click)="approveTransaction(transaction.id)">
+              Approve
+            </button>
+            <button class="btn btn-reject" (click)="rejectTransaction(transaction.id)">
+              Reject
+            </button>
+          </div>
+          <div class="action-status" *ngIf="transaction.status !== 'pending'">
+            <span class="status-indicator" [class]="'indicator-' + transaction.status">
+              {{ transaction.status === 'approved' ? '✓' : transaction.status === 'completed' ? '✓' : '✗' }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noTransactions>
+      <div class="empty-state">
+        <div class="empty-icon">💰</div>
+        <h3>No transactions found</h3>
+        <p>No transaction volume data available</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

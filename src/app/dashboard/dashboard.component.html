@@ -1,0 +1,130 @@
+<div class="dashboard">
+  <div class="dashboard-header">
+    <h2>Transaction Processing Dashboard</h2>
+    <p class="dashboard-subtitle">Real-time monitoring and approval system</p>
+  </div>
+
+  <div class="loading-spinner" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Loading dashboard data...</p>
+  </div>
+
+  <div class="dashboard-content" *ngIf="!isLoading && summary">
+    <!-- Summary Cards -->
+    <div class="summary-cards">
+      <div class="summary-card clickable" routerLink="/total-transactions">
+        <div class="card-icon transactions-icon">📊</div>
+        <div class="card-content">
+          <h3>{{ summary.totalTransactions }}</h3>
+          <p>Total Transactions</p>
+        </div>
+      </div>
+
+      <div class="summary-card pending clickable" routerLink="/pending-approvals">
+        <div class="card-icon pending-icon">⏳</div>
+        <div class="card-content">
+          <h3>{{ summary.pendingApprovals }}</h3>
+          <p>Pending Approvals</p>
+        </div>
+      </div>
+
+      <div class="summary-card completed clickable" routerLink="/completed-transactions">
+        <div class="card-icon completed-icon">✅</div>
+        <div class="card-content">
+          <h3>{{ summary.completedToday }}</h3>
+          <p>Completed Today</p>
+        </div>
+      </div>
+
+      <div class="summary-card volume clickable" routerLink="/total-volume">
+        <div class="card-icon volume-icon">💰</div>
+        <div class="card-content">
+          <h3>{{ formatCurrency(summary.totalVolume) }}</h3>
+          <p>Total Volume</p>
+        </div>
+      </div>
+
+      <div class="summary-card risk clickable" routerLink="/high-risk-transactions">
+        <div class="card-icon risk-icon">⚠️</div>
+        <div class="card-content">
+          <h3>{{ summary.highRiskTransactions }}</h3>
+          <p>High Risk</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pending Approvals Section -->
+    <div class="dashboard-section">
+      <h3>Pending Approvals</h3>
+      <div class="transactions-table" *ngIf="pendingTransactions.length > 0; else noPendingTransactions">
+        <div class="table-header">
+          <div class="col-id">Transaction ID</div>
+          <div class="col-amount">Amount</div>
+          <div class="col-type">Type</div>
+          <div class="col-risk">Risk Score</div>
+          <div class="col-description">Description</div>
+          <div class="col-actions">Actions</div>
+        </div>
+        <div class="table-row" *ngFor="let transaction of pendingTransactions">
+          <div class="col-id">{{ transaction.id }}</div>
+          <div class="col-amount">{{ formatCurrency(transaction.amount, transaction.currency) }}</div>
+          <div class="col-type">
+            <span class="transaction-type" [class]="'type-' + transaction.type">
+              {{ transaction.type | uppercase }}
+            </span>
+          </div>
+          <div class="col-risk">
+            <span class="risk-score" [class]="getRiskLevelClass(transaction.riskScore)">
+              {{ transaction.riskScore }}
+            </span>
+          </div>
+          <div class="col-description">{{ transaction.description }}</div>
+          <div class="col-actions">
+            <button class="btn btn-approve" (click)="approveTransaction(transaction.id)">
+              Approve
+            </button>
+            <button class="btn btn-reject" (click)="rejectTransaction(transaction.id)">
+              Reject
+            </button>
+          </div>
+        </div>
+      </div>
+      <ng-template #noPendingTransactions>
+        <div class="empty-state">
+          <p>No pending transactions requiring approval</p>
+        </div>
+      </ng-template>
+    </div>
+
+    <!-- High Risk Transactions Section -->
+    <div class="dashboard-section">
+      <h3>High Risk Transactions</h3>
+      <div class="risk-transactions" *ngIf="highRiskTransactions.length > 0; else noHighRiskTransactions">
+        <div class="risk-transaction" *ngFor="let transaction of highRiskTransactions">
+          <div class="risk-header">
+            <span class="transaction-id">{{ transaction.id }}</span>
+            <span class="risk-score" [class]="getRiskLevelClass(transaction.riskScore)">
+              Risk: {{ transaction.riskScore }}
+            </span>
+          </div>
+          <div class="risk-details">
+            <p><strong>Amount:</strong> {{ formatCurrency(transaction.amount, transaction.currency) }}</p>
+            <p><strong>Type:</strong> {{ transaction.type | uppercase }}</p>
+            <p><strong>Status:</strong> 
+              <span class="status" [class]="'status-' + transaction.status">
+                {{ transaction.status | uppercase }}
+              </span>
+            </p>
+            <p><strong>Description:</strong> {{ transaction.description }}</p>
+            <p *ngIf="transaction.notes"><strong>Notes:</strong> {{ transaction.notes }}</p>
+          </div>
+        </div>
+      </div>
+      <ng-template #noHighRiskTransactions>
+        <div class="empty-state">
+          <p>No high risk transactions detected</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

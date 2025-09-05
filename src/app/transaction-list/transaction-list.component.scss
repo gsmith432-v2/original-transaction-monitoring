@@ -1,0 +1,428 @@
+.transaction-list {
+  padding: 2rem;
+}
+
+.transaction-header {
+  margin-bottom: 2rem;
+}
+
+.transaction-header h2 {
+  color: #1e3c72;
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.transaction-subtitle {
+  color: #64748b;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.filters-section {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e5e9;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 2rem;
+  align-items: end;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filter-group label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.9rem;
+}
+
+.search-input,
+.filter-select {
+  padding: 0.75rem 1rem;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-input:focus,
+.filter-select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.search-input::placeholder {
+  color: #9ca3af;
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e1e5e9;
+  border-top: 4px solid #2563eb;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.transactions-container {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e5e9;
+}
+
+.transactions-summary {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.transactions-summary p {
+  color: #64748b;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.transactions-table {
+  overflow-x: auto;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 120px 140px 120px 160px 100px 100px 80px 1fr 140px;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 120px 140px 120px 160px 100px 100px 80px 1fr 140px;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid #f1f5f9;
+  align-items: center;
+  transition: background-color 0.2s ease;
+  min-height: 80px;
+}
+
+.table-row:hover {
+  background-color: #f8fafc;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.col-id {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 0.9rem;
+}
+
+.col-timestamp {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.col-amount {
+  font-weight: 600;
+  color: #059669;
+  font-size: 0.95rem;
+}
+
+.col-accounts {
+  font-size: 0.85rem;
+}
+
+.account-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.account {
+  font-family: 'Courier New', monospace;
+  color: #374151;
+  font-size: 0.8rem;
+}
+
+.arrow {
+  color: #9ca3af;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.transaction-type {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.type-wire {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.type-ach {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.type-internal {
+  background: #e0e7ff;
+  color: #6366f1;
+}
+
+.type-international {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.status-pending {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.status-approved {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.status-rejected {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.status-completed {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.risk-score {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.risk-low {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.risk-medium {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.risk-high {
+  background: #fed7aa;
+  color: #ea580c;
+}
+
+.risk-critical {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.description-content {
+  font-size: 0.85rem;
+}
+
+.description-text {
+  color: #374151;
+  margin: 0 0 0.5rem 0;
+  font-weight: 500;
+}
+
+.approver-info,
+.notes {
+  color: #64748b;
+  font-size: 0.75rem;
+  margin: 0.25rem 0;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.btn {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.btn-approve {
+  background: #059669;
+  color: white;
+}
+
+.btn-approve:hover {
+  background: #047857;
+  transform: translateY(-1px);
+}
+
+.btn-reject {
+  background: #dc2626;
+  color: white;
+}
+
+.btn-reject:hover {
+  background: #b91c1c;
+  transform: translateY(-1px);
+}
+
+.action-status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.status-indicator {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.indicator-approved,
+.indicator-completed {
+  color: #059669;
+}
+
+.indicator-rejected {
+  color: #dc2626;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem;
+  color: #64748b;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+  color: #374151;
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.empty-state p {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+@media (max-width: 1200px) {
+  .table-header,
+  .table-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .table-row {
+    padding: 1.5rem 1rem;
+    border: 1px solid #e1e5e9;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    background: #fafbfc;
+  }
+  
+  .col-id,
+  .col-timestamp,
+  .col-amount,
+  .col-accounts,
+  .col-type,
+  .col-status,
+  .col-risk,
+  .col-description,
+  .col-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  
+  .col-id::before { content: "ID: "; font-weight: 600; }
+  .col-timestamp::before { content: "Date: "; font-weight: 600; }
+  .col-amount::before { content: "Amount: "; font-weight: 600; }
+  .col-accounts::before { content: "Accounts: "; font-weight: 600; }
+  .col-type::before { content: "Type: "; font-weight: 600; }
+  .col-status::before { content: "Status: "; font-weight: 600; }
+  .col-risk::before { content: "Risk: "; font-weight: 600; }
+  .col-description::before { content: "Description: "; font-weight: 600; }
+  .col-actions::before { content: "Actions: "; font-weight: 600; }
+  
+  .action-buttons {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .filters-section {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .transaction-list {
+    padding: 1rem;
+  }
+  
+  .transactions-container {
+    padding: 1rem;
+  }
+}
