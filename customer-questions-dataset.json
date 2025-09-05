@@ -1,0 +1,266 @@
+{
+  "customerQuestionDataset": {
+    "metadata": {
+      "description": "Comprehensive dataset of typical customer questions about transaction history",
+      "basedOn": "Transaction monitoring platform data structure",
+      "version": "1.0",
+      "created": "2024-09-05",
+      "transactionFields": [
+        "id", "amount", "currency", "fromAccount", "toAccount", 
+        "description", "status", "timestamp", "type", "riskScore", "approver", "notes"
+      ],
+      "transactionTypes": ["wire", "ach", "internal", "international"],
+      "transactionStatuses": ["pending", "approved", "rejected", "completed"],
+      "sampleTransactionIds": ["TXN-001", "TXN-002", "TXN-003", "TXN-004", "TXN-005"],
+      "currencies": ["USD", "EUR"],
+      "riskScoreRange": "15-95"
+    },
+    "questionCategories": {
+      "transactionStatus": {
+        "description": "Questions about the current status of transactions",
+        "mappedFields": ["status", "approver", "notes"],
+        "questions": [
+          "What's the status of my transaction TXN-001?",
+          "Has my wire transfer been approved yet?",
+          "Why is my transaction still pending?",
+          "Who approved my transaction TXN-002?",
+          "When will my pending transaction be processed?",
+          "Is my international transfer completed?",
+          "What happened to my rejected transaction?",
+          "Why was my transaction TXN-005 rejected?",
+          "Has my ACH payment gone through?",
+          "What's the current status of all my transactions today?",
+          "Which transactions are waiting for approval?",
+          "Show me all my completed transactions"
+        ]
+      },
+      "transactionDetails": {
+        "description": "Questions about specific transaction information",
+        "mappedFields": ["id", "amount", "currency", "description", "timestamp"],
+        "questions": [
+          "How much was my wire transfer on September 1st?",
+          "What was the description for transaction TXN-003?",
+          "When did I send the $250,000 payment?",
+          "What currency was used for my cross-border payment?",
+          "Show me the details of transaction TXN-004",
+          "What was the exact amount of my payroll payment?",
+          "When was my international wire transfer initiated?",
+          "What's the description of my most recent transaction?",
+          "How much did I transfer to account ****5678?",
+          "What time was my internal transfer processed?",
+          "Give me full details for transaction TXN-001",
+          "What's the transaction ID for my vendor payment?"
+        ]
+      },
+      "accountInformation": {
+        "description": "Questions about account details in transactions",
+        "mappedFields": ["fromAccount", "toAccount"],
+        "questions": [
+          "Which account did my $75,000 transfer come from?",
+          "What account did I send money to ending in 5678?",
+          "Show me all transfers from account ****1234",
+          "What's the destination account for my wire transfer?",
+          "Which of my accounts was used for the vendor payment?",
+          "What account received my international transfer?",
+          "From which account did I make the payroll payment?",
+          "Show me transfers between my accounts ****4567 and ****8901",
+          "What's the source account for transaction TXN-001?",
+          "Which account did I use for my cross-border payment?",
+          "List all transactions involving account ****2345",
+          "What accounts are linked to my international transfers?"
+        ]
+      },
+      "transactionTypes": {
+        "description": "Questions about different types of transactions",
+        "mappedFields": ["type"],
+        "questions": [
+          "Was my $250,000 payment a wire transfer or ACH?",
+          "Show me all my wire transfers this month",
+          "What type of transaction was TXN-003?",
+          "How many international transfers do I have?",
+          "List all my ACH payments",
+          "What's the difference between my wire and ACH transfers?",
+          "Show me only internal transfers between my accounts",
+          "Which transactions are international transfers?",
+          "What type of payment did I use for the vendor?",
+          "Are there any internal transfers over $50,000?",
+          "How many wire transfers are pending approval?",
+          "Show me all transaction types I've used"
+        ]
+      },
+      "riskAndCompliance": {
+        "description": "Questions about risk scores and compliance issues",
+        "mappedFields": ["riskScore", "notes"],
+        "questions": [
+          "Why does my transaction have a high risk score?",
+          "What's the risk score for transaction TXN-001?",
+          "Which of my transactions are flagged as high risk?",
+          "Why does my international transfer require compliance review?",
+          "What makes a transaction high risk?",
+          "Show me all transactions with risk scores above 70",
+          "Why was dual approval required for my wire transfer?",
+          "What compliance issues are noted on my transaction?",
+          "Which transactions need additional documentation?",
+          "Why is my $500,000 transfer flagged for review?",
+          "What's the highest risk score among my transactions?",
+          "Are any of my ACH payments considered high risk?"
+        ]
+      },
+      "timeAndDateQueries": {
+        "description": "Questions about transaction timing and dates",
+        "mappedFields": ["timestamp"],
+        "questions": [
+          "What transactions did I make on September 1st?",
+          "When was my last international transfer?",
+          "Show me all transactions from this morning",
+          "What time was my wire transfer processed?",
+          "Which transactions happened before 10 AM today?",
+          "When did I make my most recent payment?",
+          "Show me transactions from the last 24 hours",
+          "What's my earliest transaction today?",
+          "When was my payroll payment sent?",
+          "Which transactions are from yesterday?",
+          "What's the timeline of my pending transactions?",
+          "Show me transactions processed after 11 AM"
+        ]
+      },
+      "amountAndVolume": {
+        "description": "Questions about transaction amounts and financial volumes",
+        "mappedFields": ["amount", "currency"],
+        "questions": [
+          "What's my largest transaction today?",
+          "How much money did I transfer in total?",
+          "Show me all transactions over $100,000",
+          "What's the total volume of my wire transfers?",
+          "Which transaction was for exactly $15,000?",
+          "How much did I spend on international transfers?",
+          "What's my smallest transaction amount?",
+          "Show me transactions between $50,000 and $200,000",
+          "What's the total value of my pending transactions?",
+          "How much money is in rejected transactions?",
+          "What's the average amount of my transactions?",
+          "Which currency do I use most for transfers?"
+        ]
+      },
+      "searchAndFiltering": {
+        "description": "Complex queries combining multiple criteria",
+        "mappedFields": ["multiple"],
+        "questions": [
+          "Show me pending wire transfers over $200,000",
+          "What high-risk international transactions do I have?",
+          "Find completed ACH payments from account ****2345",
+          "Show me rejected transactions with compliance notes",
+          "Which approved transactions were processed by Sarah Johnson?",
+          "Find all EUR transactions with high risk scores",
+          "Show me internal transfers completed today",
+          "What pending transactions require dual approval?",
+          "Find wire transfers to account ****5678 that are approved",
+          "Show me all transactions with risk scores between 70-90",
+          "List international transfers over $100,000 that are pending",
+          "Find all transactions from account ****1234 with high risk"
+        ]
+      },
+      "summaryAndOverview": {
+        "description": "Questions about transaction summaries and overviews",
+        "mappedFields": ["multiple"],
+        "questions": [
+          "How many transactions do I have in total?",
+          "What's my transaction summary for today?",
+          "How many pending approvals do I have?",
+          "Show me a breakdown of my transaction types",
+          "What's the status distribution of my transactions?",
+          "How many high-risk transactions do I have?",
+          "What's my total transaction volume?",
+          "How many transactions were completed today?",
+          "Give me an overview of my recent activity",
+          "What's the average amount of my transactions?",
+          "How many transactions need my attention?",
+          "What's my monthly transaction summary?"
+        ]
+      },
+      "troubleshooting": {
+        "description": "Questions about transaction issues and problems",
+        "mappedFields": ["status", "notes", "riskScore"],
+        "questions": [
+          "Why is my transaction taking so long to process?",
+          "What documentation is missing for my rejected transfer?",
+          "How can I speed up my pending approval?",
+          "Why was my transaction flagged for review?",
+          "What do I need to do to complete my transaction?",
+          "Who can I contact about my rejected payment?",
+          "Why does my transfer require dual approval?",
+          "What's causing the delay in my wire transfer?",
+          "How do I provide additional documentation?",
+          "Why can't my international transfer be processed?",
+          "What steps are needed to resolve my rejected transaction?",
+          "How long do high-risk transactions take to approve?"
+        ]
+      }
+    },
+    "sampleConversations": [
+      {
+        "userQuestion": "What's the status of my transaction TXN-001?",
+        "expectedResponse": "Transaction TXN-001 is currently pending approval. It's a wire transfer for $250,000 USD from account ****1234 to account ****5678 for vendor payment. The transaction has a high risk score of 85 and requires dual approval due to the high value.",
+        "dataUsed": ["id", "status", "type", "amount", "currency", "fromAccount", "toAccount", "description", "riskScore", "notes"]
+      },
+      {
+        "userQuestion": "Show me all my wire transfers",
+        "expectedResponse": "You have 2 wire transfers: TXN-001 ($250,000 USD, pending - vendor payment) and TXN-003 ($500,000 USD, pending - international wire transfer). Both are currently awaiting approval.",
+        "dataUsed": ["type", "id", "amount", "currency", "status", "description"]
+      },
+      {
+        "userQuestion": "Why was my transaction rejected?",
+        "expectedResponse": "Transaction TXN-005 was rejected by David Wilson due to insufficient documentation provided. It was a €125,000 cross-border payment from account ****5678 to account ****9012 with a risk score of 78.",
+        "dataUsed": ["id", "status", "approver", "notes", "amount", "currency", "description", "fromAccount", "toAccount", "riskScore"]
+      },
+      {
+        "userQuestion": "Which transactions are high risk?",
+        "expectedResponse": "You have 3 high-risk transactions (risk score ≥70): TXN-001 (risk score 85, wire transfer), TXN-003 (risk score 95, international wire), and TXN-005 (risk score 78, cross-border payment).",
+        "dataUsed": ["riskScore", "id", "type", "description"]
+      },
+      {
+        "userQuestion": "How much money did I transfer today?",
+        "expectedResponse": "Your total transaction volume for September 1st is $965,000 USD and €125,000 EUR across 5 transactions. This includes wire transfers, ACH payments, internal transfers, and international transfers.",
+        "dataUsed": ["amount", "currency", "timestamp", "type"]
+      },
+      {
+        "userQuestion": "What transactions need my attention?",
+        "expectedResponse": "You have 2 transactions requiring attention: TXN-001 (pending wire transfer, $250,000) and TXN-003 (pending international transfer, $500,000). Both have high risk scores and are awaiting approval.",
+        "dataUsed": ["status", "id", "type", "amount", "riskScore"]
+      }
+    ],
+    "questionPatterns": {
+      "statusInquiries": [
+        "What's the status of [transaction_id]?",
+        "Has my [transaction_type] been [status]?",
+        "Why is my transaction [status]?",
+        "When will my [status] transaction be processed?"
+      ],
+      "amountQueries": [
+        "How much was my [transaction_type]?",
+        "What's the amount of transaction [transaction_id]?",
+        "Show me transactions over [amount]",
+        "What's my total [transaction_type] volume?"
+      ],
+      "timeQueries": [
+        "When was [transaction_id] processed?",
+        "What transactions happened on [date]?",
+        "Show me transactions from [time_period]",
+        "What's my [time_period] transaction activity?"
+      ],
+      "accountQueries": [
+        "Which account was used for [transaction_id]?",
+        "Show me transfers from account [account_number]",
+        "What account received my [transaction_type]?",
+        "List transactions involving account [account_number]"
+      ]
+    },
+    "implementationNotes": {
+      "dataAccess": "Questions should be answered using the TransactionService methods: getTransactions(), getTransactionById(), getPendingTransactions(), getHighRiskTransactions(), etc.",
+      "responseFormat": "Responses should be conversational and include relevant transaction details",
+      "errorHandling": "Handle cases where transaction IDs don't exist or no transactions match the criteria",
+      "contextAwareness": "Chatbot should understand context like 'my transactions', 'today', 'this month', etc.",
+      "securityConsiderations": "Mask full account numbers, only show partial account information (****1234 format)"
+    }
+  }
+}
