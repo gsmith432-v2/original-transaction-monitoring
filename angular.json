@@ -61,10 +61,10 @@
           "options": {},
           "configurations": {
             "production": {
-              "browserTarget": "banking-transaction-app-ng14:build:production"
+              "buildTarget": "banking-transaction-app-ng14:build:production"
             },
             "development": {
-              "browserTarget": "banking-transaction-app-ng14:build:development"
+              "buildTarget": "banking-transaction-app-ng14:build:development"
             }
           },
           "defaultConfiguration": "development"
