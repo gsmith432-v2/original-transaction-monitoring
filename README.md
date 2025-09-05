@@ -1,6 +1,6 @@
-# Enterprise Banking Transaction Processing Application (Angular 14)
+# Enterprise Banking Transaction Processing Application (Angular 18)
 
-A comprehensive transaction processing application for enterprise banking built with Angular 14, demonstrating modern banking workflows including real-time monitoring, approval systems, and risk assessment.
+A comprehensive transaction processing application for enterprise banking built with Angular 18, demonstrating modern banking workflows including real-time monitoring, approval systems, and risk assessment.
 
 ## 🏦 Features
 
@@ -26,7 +26,8 @@ A comprehensive transaction processing application for enterprise banking built 
 - **Professional banking UI** with hover effects and responsive design
 
 ### Technical Architecture
-- **Angular 14** with traditional module-based architecture
+- **Angular 18** with modern build system (@angular/build:application)
+- **TypeScript 5.4** for enhanced type safety and performance
 - **RxJS observables** for reactive data management
 - **Mock transaction service** with realistic banking data
 - **Responsive design** optimized for enterprise banking workflows
@@ -35,8 +36,8 @@ A comprehensive transaction processing application for enterprise banking built 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js (v14 or higher)
-- Angular CLI 14
+- Node.js (v18 or higher)
+- Angular CLI 18
 
 ### Installation
 ```bash
@@ -109,17 +110,19 @@ ng lint
 
 ## 🏗️ Architecture Decisions
 
-This application was built with **Angular 14** to demonstrate:
-- Traditional module-based architecture
+This application has been **upgraded to Angular 18** featuring:
+- Modern build system with @angular/build:application builder
+- TypeScript 5.4 for enhanced performance and type safety
+- Traditional module-based architecture (ready for standalone component migration)
 - Component-based design patterns
 - Service injection and dependency management
 - RxJS reactive programming
 - Professional enterprise UI/UX
 
-The codebase serves as a foundation for demonstrating Angular upgrade paths to newer versions (Angular 18+) showcasing improvements in:
-- Standalone components
-- New control flow syntax
-- Signals and reactive primitives
+The codebase is now ready for further Angular 18+ modernization including:
+- Migration to standalone components
+- New control flow syntax (@if, @for, @switch)
+- Angular Signals implementation
 - Enhanced performance optimizations
 
 ## 📊 Mock Data
@@ -142,12 +145,13 @@ The application includes realistic banking transaction data with:
 
 ## 📈 Future Enhancements
 
-This Angular 14 foundation is designed for future upgrades to demonstrate:
-- Migration to Angular 18+ standalone components
-- Implementation of Angular Signals
-- New control flow syntax (@if, @for, @switch)
+This Angular 18 foundation is ready for further modernization:
+- Migration to standalone components architecture
+- Implementation of Angular Signals for reactive state management
+- New control flow syntax (@if, @for, @switch) adoption
 - Enhanced performance with OnPush change detection
 - Modern Angular patterns and best practices
+- Progressive Web App (PWA) capabilities
 
 ---
 
